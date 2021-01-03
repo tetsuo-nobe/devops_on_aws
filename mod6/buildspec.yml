@@ -1,0 +1,24 @@
+﻿# Copyright 2021 Amazon Web Services, Inc. or its affiliates. All rights reserved.
+version: 0.1
+# 下記の環境変数をCodeBuildプロジェクトに設定
+# AWS_DEFAULT_REGION=ap-northeast-1
+# IMAGE_REPO_NAME=codebuild-docker(事前に作成しておく)
+# IMAGE_TAG=latest
+# AWS_ACCOUNT_ID=<アカウントID>
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $IMAGE_REPO_NAME .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      

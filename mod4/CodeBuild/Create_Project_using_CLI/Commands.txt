@@ -1,0 +1,18 @@
+# Copyright 2021 Amazon Web Services, Inc. or its affiliates. All rights reserved.
+# プロジェクトの作成
+aws codebuild create-project --cli-input-json file://<json-file>
+
+# プロジェクト作成用のJSONのひな形を生成するコマンド
+aws codebuild create-project --generate-cli-skeleton > project_template.json
+#
+# [参考] 既存のプロジェクトをJSON形式で出力し、それを参考にJSONを作ると効率的
+aws codebuild batch-get-projects --names <project_name> > export.json
+# 編集例）
+# 上記で出力されたJSONで、"projects"の配列の内容を取り出す。
+# nameやsourceやartifactsなどを変更する
+# arn、created、lastModifiedを削除する。
+# serviceRoleに作成するプロジェクト用のロールのARNを指定する。
+# "badgeEnabled"の部分をひな形の形に合わせる。例）"badgeEnabled": false,
+
+
+

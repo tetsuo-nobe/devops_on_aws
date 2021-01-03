@@ -1,0 +1,16 @@
+﻿# Copyright 2021 Amazon Web Services, Inc. or its affiliates. All rights reserved.
+#
+# ECRリポジトリ名がcodebuild-dockerの場合
+#
+ aws ecr get-login-password | docker login --username AWS --password-stdin \
+   https://<Account_ID>.dkr.ecr.ap-northeast-1.amazonaws.com  
+
+ docker pull <Account_ID>.dkr.ecr.ap-northeast-1.amazonaws.com/codebuild-docker:latest
+ 
+ docker images
+ 
+ docker run --name webapp -d -p 80:80 <Account_ID>.dkr.ecr.ap-northeast-1.amazonaws.com/codebuild-docker
+ 
+ docker ps
+ 
+ docker stop webapp

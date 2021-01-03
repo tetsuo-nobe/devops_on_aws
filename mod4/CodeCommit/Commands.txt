@@ -1,0 +1,40 @@
+# HTTP GRCでgit clone
+git clone codecommit://<repository_name>  demo-repo
+
+# ローカルリポジトリへ移動
+cd demo-repo/
+
+# ソースを作成、編集、保存
+
+# 変更をステージングに追加
+git add .
+
+# コミット
+git commit -m "add files"
+
+# プッシュ
+git push origin master
+
+#----------------------------------------------------------
+
+# 現在のブランチを確認
+git branch
+
+#ブランチを作成して、切り替える (ローカルにブランチができる）
+git checkout -b  branchA
+
+git branch
+
+# ファイルを編集
+
+# 現在のブランチや修正ファイル名の確認
+git status
+
+# 変更をステージングに追加
+git add .
+
+# コミット
+git commit -m 'modify file'
+
+# プッシュ
+git push origin branchA

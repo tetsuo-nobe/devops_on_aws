@@ -1,0 +1,52 @@
+
+# CDKのバージョン表示
+cdk --version
+
+# CDK用のフォルダ作成と移動
+mkdir hello-cdk
+cd hello-cdk
+
+# CDK初期化
+cdk init --language javascript
+
+# 利用するConstructをインストール
+npm install @aws-cdk/aws-s3
+
+# スタックの表示
+cdk ls
+
+# S3バケットを作成するコードを追加
+# lib/hello-cdk-stack.js
+#---------------
+const cdk = require('@aws-cdk/core');
+const s3 = require('@aws-cdk/aws-s3');  // 追加
+
+class HelloCdkStack extends cdk.Stack {
+  /**
+   *
+   * @param {cdk.Construct} scope
+   * @param {string} id
+   * @param {cdk.StackProps=} props
+   */
+  constructor(scope, id, props) {
+    super(scope, id, props);
+
+    // The code that defines your stack goes here
+    //下記3行を追加
+    new s3.Bucket(this, "cdkdemobucket-tnobe", {
+      versioned: true,
+    });
+  }
+}
+
+module.exports = { HelloCdkStack }
+#---------------
+
+# どのようなCFnテンプレートになるか標準出力に表示 
+cdk synth 
+
+# デプロイ(スタック作成)
+cdk deploy
+
+# スタック削除
+cdk destroy

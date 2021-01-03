@@ -1,0 +1,213 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Create WordPress stack'
+Parameters:
+  KeyName:
+    Description: 'Key Pair name'
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    Default: mykey
+Mappings:
+  RegionMap:
+    'ap-south-1':
+      AMI: 'ami-2ed19c41'
+    'eu-west-3':
+      AMI: 'ami-c8a017b5'
+    'eu-west-2':
+      AMI: 'ami-e3051987'
+    'eu-west-1':
+      AMI: 'ami-760aaa0f'
+    'ap-northeast-2':
+      AMI: 'ami-fc862292'
+    'ap-northeast-1':
+      AMI: 'ami-0f310fced6141e627'
+    'sa-east-1':
+      AMI: 'ami-1678037a'
+    'ca-central-1':
+      AMI: 'ami-ef3b838b'
+    'ap-southeast-1':
+      AMI: 'ami-dd7935be'
+    'ap-southeast-2':
+      AMI: 'ami-1a668878'
+    'eu-central-1':
+      AMI: 'ami-e28d098d'
+    'us-east-1':
+      AMI: 'ami-0323c3dd2da7fb37d'
+    'us-east-2':
+      AMI: 'ami-0f7919c33c90f5b58'
+    'us-west-1':
+      AMI: 'ami-06fcc1f0bc2c8943f'
+    'us-west-2':
+      AMI: 'ami-0d6621c01e8c2de2c'
+Resources:
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: '10.20.0.0/16'
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: AllinOneVPC
+  InternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties: {}
+  VPCGatewayAttachment:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  PublicSubnet01:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CidrBlock: '10.20.0.0/24'
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: true
+      Tags:
+      - Key: Name
+        Value: PublicSubnet01
+  PublicSubnet02:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: '10.20.1.0/24'
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: true
+      Tags:
+      - Key: Name
+        Value: PublicSubnet02
+  PrivateSubnet01:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CidrBlock: '10.20.2.0/24'
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: PrivateSubnet01
+  PrivateSubnet02:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: '10.20.3.0/24'
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: PrivateSubnet02
+  RouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+  RouteTableAssociationA:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet01
+      RouteTableId: !Ref RouteTable
+  RouteTableAssociationB:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet02
+      RouteTableId: !Ref RouteTable
+  RoutePublicToInternet:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: '0.0.0.0/0'
+      GatewayId: !Ref InternetGateway
+    DependsOn: VPCGatewayAttachment
+  websg:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName : 'websg'
+      GroupDescription: 'Web Server'
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
+  dbsg:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName : 'dbsg'
+      GroupDescription: 'DB Server'
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 3306
+        ToPort: 3306
+        SourceSecurityGroupId: !Ref websg
+  dbsubnetg:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    Properties:
+      DBSubnetGroupName: dbsubnetg 
+      DBSubnetGroupDescription: Database Subnet Group
+      SubnetIds:
+      - !Ref PrivateSubnet01
+      - !Ref PrivateSubnet02
+      Tags:
+      - Key: Name
+        Value: 'dbsubnetg'
+  chapter1:
+    Type: 'AWS::RDS::DBInstance'
+    DeletionPolicy: Delete # For AWS::RDS::DBInstance resources that don't specify the DBClusterIdentifier property, the default policy is Snapshot which can cause unwanted costs. However, for production setups, we highly recommend to stay with the default to avoid data loss.
+    Properties:
+      AllocatedStorage: 5
+      BackupRetentionPeriod: 0
+      DBInstanceIdentifier: chapter1
+      DBInstanceClass: 'db.t2.micro'
+      DBName: wordpress
+      Engine: MySQL
+      EngineVersion: 5.7.23
+      StorageType: gp2
+      MasterUsername: wpuser
+      MasterUserPassword: wppassword
+      VPCSecurityGroups:
+      - !Sub ${dbsg.GroupId}
+      DBSubnetGroupName: !Ref dbsubnetg
+      AvailabilityZone: !Select [0, !GetAZs '']
+      Tags:
+      - Key: Name
+        Value: 'chapter1'
+    DependsOn: dbsg
+  WebServer01: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: !FindInMap [RegionMap, !Ref 'AWS::Region', AMI]
+      KeyName: !Ref KeyName
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !GetAtt websg.GroupId
+      SubnetId: !Ref PublicSubnet01
+      UserData: !Base64 |
+        #!/bin/bash
+        yum -y update
+        logger "Lab1:yum update."
+        amazon-linux-extras install php7.2 -y
+        yum -y install mysql httpd php-mbstring php-xml gd php-gd
+        logger "Lab1:install packages."
+        systemctl enable httpd.service
+        systemctl start httpd.service
+        logger "Lab1:Apache httpd enabled and start."
+        wget http://ja.wordpress.org/latest-ja.tar.gz  /
+        tar zxvf /latest-ja.tar.gz
+        cp -r /wordpress/* /var/www/html/
+        chown apache:apache -R /var/www/html
+        logger "Lab1:WordPress installed."
+      Tags:
+          - Key: Name
+            Value: 'Web Server01'
+Outputs:
+ DBInstanceEndpoint:
+    Value: !GetAtt chapter1.Endpoint.Address
+ WebServerDnsname:
+    Value: !GetAtt WebServer01.PublicDnsName
+ chapter1db:
+    Value: !Ref chapter1
+    Export:
+      Name: chapter1-id
+ 
+

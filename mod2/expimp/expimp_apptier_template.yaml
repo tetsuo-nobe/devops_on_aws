@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Export Import example: apptier'
+Resources:
+  websg:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName : 'websg'
+      GroupDescription: 'Web Server'
+      VpcId: !ImportValue devopsVPCID
+      SecurityGroupIngress:
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
+Outputs:
+  SecurityGroupId:
+    Description: 'ID for Web Server security group'
+    Value: !GetAtt websg.GroupId
+

@@ -1,0 +1,25 @@
+
+
+東京リージョンでDefault VPCを使う事。
+
+
+Helper-Script-Test-cfn-init.yaml 
+　--> 単独で使用する
+
+Helper-Script-Test-cfn-signal.yaml 
+　--> 単独で使用する。
+　　　signalが10秒以内に受け取る設定にして敢えてスタック作成を失敗させている
+
+      -eは、exit_codeの指定。
+    
+       Failed to receive 1 resource signal(s) within the specified duration
+
+--------------------
+cfn-hup
+
+まず下記でスタック作成して
+Helper-Script-Test-cfn-hup.yaml
+
+次に下記のスタックで更新する
+Helper-Script-Test-cfn-hup-update.yaml
+

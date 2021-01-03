@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Nest example: apptier'
+Parameters:
+  VPCId:
+    Type: String
+    Description: VPC id
+Resources:
+  websg:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName : 'websg'
+      GroupDescription: 'Web Server'
+      VpcId: !Ref VPCId
+      SecurityGroupIngress:
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+      - CidrIp: '0.0.0.0/0'
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
+Outputs:
+  SecurityGroupId:
+    Description: 'ID for Web Server security group'
+    Value: !GetAtt websg.GroupId
+

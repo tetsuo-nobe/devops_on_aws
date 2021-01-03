@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Nest example: network'
+Parameters:
+  CIDR: 
+    Type: String
+    Description: VPC CIDR
+Resources:
+  DevOpsDemoVPC1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CIDR
+      InstanceTenancy: default
+Outputs:
+  VPCId:
+    Description: 'ID for new VPC'
+    Value: !Ref DevOpsDemoVPC1

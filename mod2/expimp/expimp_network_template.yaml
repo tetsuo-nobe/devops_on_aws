@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Export Import example: network'
+Resources:
+  DevOpsDemoVPC2:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: '10.2.0.0/16'
+      InstanceTenancy: default
+Outputs:
+  VPCId:
+    Description: 'ID for new VPC'
+    Value: !Ref DevOpsDemoVPC2
+    Export:
+      Name: devopsVPCID
+

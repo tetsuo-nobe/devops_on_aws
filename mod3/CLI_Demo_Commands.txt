@@ -1,0 +1,40 @@
+
+# バージョン表示
+  aws --version
+
+# ヘルプ表示
+  aws help
+
+# サービスを指定してヘルプ表示
+  aws ec2 help
+
+# 認証情報,リージョン,出力形式を構成
+  aws configure
+
+# 構成内容を表示
+  aws configure list
+
+# リージョンの構成を表示
+  aws configure get region
+
+# EC2インスタンスの起動
+  aws ec2 run-instances --image-id ami-xxxx  --count 1 --instance-type t2.micro --key-name xxxx --security-group-ids sg-xxxx --subnet-id subnet-xxxx
+
+# EC2インスタンスが実行状態になるまで待機
+　aws ec2 wait instance-running --instance-ids i-xxxx
+
+# EC2インスタンスの情報表示
+  aws ec2 describe-instances --instance-ids i-xxxx
+
+# CloudFormationのスタック作成
+  aws cloudformation create-stack --stack-name demostack  --template-body file://demo_template.yaml --parameters ParameterKey=KeyName,ParameterValue=xxxx
+
+# CloudFormationのスタック作成が完了するまで待機
+  aws cloudformation wait stack-create-complete --stack-name demostack
+
+# CloudFormationのスタック削除
+  aws cloudformation delete-stack --stack-name demostack 
+
+# CloudFormationのスタック削除完了まで待機
+  aws cloudformation wait stack-delete-complete --stack-name demostack
+
