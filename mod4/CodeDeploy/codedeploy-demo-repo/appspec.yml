@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: ./SimpleSpringBoot-0.1.0.jar
+    destination: /var/SimpleSpringBoot/
+  - source: ./SimpleSpringBoot.service
+    destination: /etc/systemd/system/
+hooks:
+  ApplicationStop:
+    - location: stopapp.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: startapp.sh
+      timeout: 300
+      runas: root
