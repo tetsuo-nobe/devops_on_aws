@@ -3,7 +3,7 @@ Description = SimpleSpringBoot
 After = syslog.target
 
 [Service]
-ExecStart = java -jar /var/SimpleSpringBoot/SimpleSpringBoot-0.1.0.jar
+ExecStart = /var/SimpleSpringBoot/SimpleSpringBoot-0.1.0.jar
 Restart = always
 Type = simple
 User = root
