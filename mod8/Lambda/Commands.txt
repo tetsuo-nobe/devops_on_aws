@@ -1,0 +1,12 @@
+
+#
+# https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/tutorial-lambda-sam.html
+#
+
+sam package --template-file template.yml --output-template-file package.yml --s3-bucket <your_bucket_name>
+
+sam deploy --template-file package.yml --stack-name my-date-time-app --capabilities CAPABILITY_IAM
+
+aws lambda invoke --function <your-function-arn> --cli-binary-format --payload '{"option": "date", "period": "today"}'  out.txt
+
+aws lambda invoke --function <your-function-arn> --cli-binary-format --payload '{\"option\": \"time\"}' out.txt 
