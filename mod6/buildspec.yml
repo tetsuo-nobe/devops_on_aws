@@ -1,5 +1,5 @@
 ﻿# Copyright 2021 Amazon Web Services, Inc. or its affiliates. All rights reserved.
-version: 0.1
+version: 0.2
 # 下記の環境変数をCodeBuildプロジェクトに設定
 # AWS_DEFAULT_REGION=ap-northeast-1
 # IMAGE_REPO_NAME=codebuild-docker(事前に作成しておく)
