@@ -2,8 +2,8 @@
 - 下記のAWSリソースを使用
   - VPC
     - Internet Gateway
-    - サブネット
-    - ルートテーブル
+    - Subnet
+    - RouteTable
     - セキュリティ・グループ
   - EC2インスタンス 
   - RDS 
