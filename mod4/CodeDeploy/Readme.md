@@ -18,4 +18,4 @@
 - アプリケーションのリビジョンはappspec.ymlやデプロイに必要なスクリプトを含みS3バケットに格納されている。
 
 
-![codedeploy-demo-img](https://devops.nobelabo.net/img/demo_codedeploy.png)
+![codedeploy-demo-img](https://devops.nobelabo.net/img/demo-codedeploy.png)
