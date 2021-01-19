@@ -11,6 +11,8 @@
     - SpringBootアプリケーションのサービス設定用ファイル
 - srcフォルダ
   - SpringBootアプリケーションのソース用フォルダ
+- appspec.yml
+  - CodeDeployによるデプロイ手順が記載されたファイル
 - buildspec.yml
   - CodeBuildによるビルド処理内容が記述されているファイル
     - Mavenのコマンドを発行しSpringBootアプリケーションのビルドとパッケージを行っている。
@@ -18,8 +20,6 @@
       - ビルドされたSpringBootアプリケーションのJARファイル
       - appspec.yml (デプロイステージのCodeDeployで必要なため)
       - deployフォルダ内の全てのファイル(デプロイステージのCodeDeployで必要なため)
-- appspec.yml
-  - CodeDeployによるデプロイ手順が記載されたファイル
 - pom.xml
   - Mavenに必要な設定ファイル
 
