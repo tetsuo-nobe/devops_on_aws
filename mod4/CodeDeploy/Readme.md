@@ -12,4 +12,5 @@
 - stopapp.sh
   - アプリケーション停止用のスクリプト
   - ApplicationStopフックで実行するようappspec.ymlで指定されている
-  
+
+![codedeploy-demo-img](https://devops.nobelabo.net/img/demo-codedeploy.png)
