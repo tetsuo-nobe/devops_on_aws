@@ -50,3 +50,6 @@ cdk deploy
 
 # スタック削除
 cdk destroy
+# 注意：このサンプルでは、S3バケットのDeletionPolicyがデフォルトでRetainに設定されるのでS3バケットは削除されない
+# [参考] https://dev.classmethod.jp/articles/aws-cdk-s3-delete-policy/
+
