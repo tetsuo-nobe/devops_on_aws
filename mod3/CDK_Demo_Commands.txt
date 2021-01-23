@@ -9,7 +9,7 @@ cd hello-cdk
 # CDK初期化
 cdk init --language javascript
 
-# 利用するConstructをインストール
+# 利用するConstructライブラリをインストール
 npm install @aws-cdk/aws-s3
 
 # スタックの表示
