@@ -35,6 +35,7 @@ class HelloCdkStack extends cdk.Stack {
     //下記3行を追加
     new s3.Bucket(this, "cdkdemobucket-tnobe", {
       versioned: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
   }
 }
@@ -45,11 +46,12 @@ module.exports = { HelloCdkStack }
 # どのようなCFnテンプレートになるか標準出力に表示 
 cdk synth 
 
+# (注意) removalPolicy: cdk.RemovalPolicy.DESTROYを明示的に指定しないとDeletionPolicyがRetainに設定されてしまう。
+# https://docs.aws.amazon.com/cdk/latest/guide/resources.html#resources_removal
+# [参考] https://dev.classmethod.jp/articles/aws-cdk-s3-delete-policy/
+
 # デプロイ(スタック作成)
 cdk deploy
 
 # スタック削除
 cdk destroy
-# 注意：このサンプルでは、S3バケットのDeletionPolicyがデフォルトでRetainに設定されるのでS3バケットは削除されない
-# [参考] https://dev.classmethod.jp/articles/aws-cdk-s3-delete-policy/
-
