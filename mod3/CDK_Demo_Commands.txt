@@ -32,8 +32,9 @@ class HelloCdkStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
-    //下記3行を追加
-    new s3.Bucket(this, "cdkdemobucket-tnobe", {
+    //下記5行を追加
+    const bucket = new s3.Bucket(this, "cdkdemobucket-tnobe", {
+      bucketName: "cdkdemobucket-tnobe-0000",
       versioned: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
