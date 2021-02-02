@@ -6,11 +6,11 @@ sam init --runtime python3.7
 
 cd sam-app
 
+sam build
+
 sam local invoke 
 
 sam validate
-
-sam build
 
 aws s3 mb s3://<your bucket name>
 
