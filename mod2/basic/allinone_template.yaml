@@ -1,11 +1,39 @@
----
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Create WordPress stack'
+
+# パラメータセクション
 Parameters:
   KeyName:
     Description: 'Key Pair name'
     Type: 'AWS::EC2::KeyPair::KeyName'
     Default: mykey
+  VPCCIDR: 
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
+    Default: 10.20.0.0/16
+    Description: VPC CIDR Block (eg 10.20.0.0/16)
+    Type: String
+  PUBLICSUBNET01CIDR: 
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
+    Default: 10.20.0.0/24
+    Description: VPC CIDR Block (eg 10.20.0.0/24)
+    Type: String
+  PUBLICSUBNET02CIDR: 
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
+    Default: 10.20.1.0/24
+    Description: VPC CIDR Block (eg 10.20.1.0/24)
+    Type: String
+  PRIVATESUBNET01CIDR: 
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
+    Default: 10.20.2.0/24
+    Description: VPC CIDR Block (eg 10.20.2.0/24)
+    Type: String
+  PRIVATESUBNET02CIDR: 
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
+    Default: 10.20.3.0/24
+    Description: VPC CIDR Block (eg 10.20.3.0/24)
+    Type: String
+
+# マッピングセクション
 Mappings:
   RegionMap:
     'ap-south-1':
@@ -38,11 +66,13 @@ Mappings:
       AMI: 'ami-06fcc1f0bc2c8943f'
     'us-west-2':
       AMI: 'ami-0d6621c01e8c2de2c'
+
+# リソースセクション
 Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
     Properties:
-      CidrBlock: '10.20.0.0/16'
+      CidrBlock: !Ref VPCCIDR
       EnableDnsHostnames: true
       Tags:
       - Key: Name
@@ -59,7 +89,7 @@ Resources:
     Type: 'AWS::EC2::Subnet'
     Properties:
       AvailabilityZone: !Select [0, !GetAZs '']
-      CidrBlock: '10.20.0.0/24'
+      CidrBlock: !Ref PUBLICSUBNET01CIDR
       VpcId: !Ref VPC
       MapPublicIpOnLaunch: true
       Tags:
@@ -69,7 +99,7 @@ Resources:
     Type: 'AWS::EC2::Subnet'
     Properties:
       AvailabilityZone: !Select [1, !GetAZs '']
-      CidrBlock: '10.20.1.0/24'
+      CidrBlock: !Ref PUBLICSUBNET02CIDR
       VpcId: !Ref VPC
       MapPublicIpOnLaunch: true
       Tags:
@@ -79,7 +109,7 @@ Resources:
     Type: 'AWS::EC2::Subnet'
     Properties:
       AvailabilityZone: !Select [0, !GetAZs '']
-      CidrBlock: '10.20.2.0/24'
+      CidrBlock: !Ref PRIVATESUBNET01CIDR
       VpcId: !Ref VPC
       Tags:
       - Key: Name
@@ -88,7 +118,7 @@ Resources:
     Type: 'AWS::EC2::Subnet'
     Properties:
       AvailabilityZone: !Select [1, !GetAZs '']
-      CidrBlock: '10.20.3.0/24'
+      CidrBlock: !Ref PRIVATESUBNET02CIDR
       VpcId: !Ref VPC
       Tags:
       - Key: Name
@@ -200,6 +230,8 @@ Resources:
       Tags:
           - Key: Name
             Value: 'Web Server01'
+
+# アウトプットセクション
 Outputs:
  DBInstanceEndpoint:
     Value: !GetAtt chapter1.Endpoint.Address
