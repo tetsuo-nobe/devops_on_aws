@@ -53,7 +53,7 @@ Mappings:
     'ca-central-1':
       AMI: 'ami-ef3b838b'
     'ap-southeast-1':
-      AMI: 'ami-dd7935be'
+      AMI: 'ami-0dde3b117600b1658'
     'ap-southeast-2':
       AMI: 'ami-1a668878'
     'eu-central-1':
