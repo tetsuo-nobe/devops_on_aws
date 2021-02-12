@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Create WordPress stack'
 
-# 繝代Λ繝｡繝ｼ繧ｿ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
+# パラメータセクション
 Parameters:
   KeyName:
     Description: 'Key Pair name'
@@ -33,7 +33,7 @@ Parameters:
     Description: VPC CIDR Block (eg 10.20.3.0/24)
     Type: String
 
-# 繝槭ャ繝斐Φ繧ｰ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
+#マッピングセクション
 Mappings:
   RegionMap:
     'ap-south-1':
@@ -53,7 +53,7 @@ Mappings:
     'ca-central-1':
       AMI: 'ami-ef3b838b'
     'ap-southeast-1':
-      AMI: 'ami-0dde3b117600b1658'
+      AMI: 'ami-0e2e44c03b85f58b3'
     'ap-southeast-2':
       AMI: 'ami-1a668878'
     'eu-central-1':
@@ -67,7 +67,7 @@ Mappings:
     'us-west-2':
       AMI: 'ami-0d6621c01e8c2de2c'
 
-# 繝ｪ繧ｽ繝ｼ繧ｹ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
+# リソースセクション
 Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
@@ -231,7 +231,7 @@ Resources:
           - Key: Name
             Value: 'Web Server01'
 
-# 繧｢繧ｦ繝医�励ャ繝医そ繧ｯ繧ｷ繝ｧ繝ｳ
+# アウトプットセクション
 Outputs:
  DBInstanceEndpoint:
     Value: !GetAtt chapter1.Endpoint.Address
