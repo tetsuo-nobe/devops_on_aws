@@ -4,6 +4,9 @@ git clone codecommit://<repository_name>  demo-repo
 # ローカルリポジトリへ移動
 cd demo-repo/
 
+# ブランチをmainに変更
+git checkout -b main
+
 # ソースを作成、編集、保存
 
 # 変更をステージングに追加
@@ -13,7 +16,7 @@ git add .
 git commit -m "add files"
 
 # プッシュ
-git push origin master
+git push -u origin main
 
 #----------------------------------------------------------
 
