@@ -52,6 +52,8 @@ cdk synth
 # [参考] https://dev.classmethod.jp/articles/aws-cdk-s3-delete-policy/
 
 # デプロイ(スタック作成)
+# (初回の場合は、先にcdk bootstrap を実行して CDKが使用するS3バケットを作成します。)
+
 cdk deploy
 
 # スタック削除
