@@ -72,7 +72,7 @@ Template selection: 1
   - デフォルトで {message: hello world}というJSONを返します。必要に応じて変更します。　
 
 
-11. SAMでデプロイする前準備をします。
+11. SAMでテストやデプロイの前準備を行います。
 
 ```
 cd aws-sam-demo-app
