@@ -72,8 +72,14 @@ Template selection: 1
   - デフォルトで {message: hello world}というJSONを返します。必要に応じて変更します。　
 
 
+11. SAMでデプロイする前準備をします。
 
-11. SAMを使用しローカルでテストします。
+```
+cd aws-sam-demo-app
+sam build
+```
+
+12. SAMを使用しローカルでテストします。
 
 ```
 sam local invoke 
@@ -82,13 +88,6 @@ sam local invoke
 [その他のローカルテスト用のコマンド](#その他のローカルテスト用のコマンド) 
 <br />
 <br />
-
-12. SAMでデプロイする前準備をします。
-
-```
-cd aws-sam-demo-app
-sam build
-```
 
 この後、デプロイを実施します。
 sam deploy --guidedを使わない場合は下の12番のタスクを実行します。 
