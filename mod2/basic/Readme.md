@@ -14,3 +14,5 @@
 - 下記をOutput指定
   - 作成したMySQLデータベースのエンドポイント・アドレス
   - 作成したEC2インスタンスのパブリックDNSアドレス
+
+![cfn-demo-img](https://devops.nobelabo.net/img/github_mod2_wordpress.png)
