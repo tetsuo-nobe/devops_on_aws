@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MyInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      DisableApiTermination: 'FALSE'
+      ImageId: ami-0801a1e12f4a9ccc0
+      InstanceType: t2.micro
+      KeyName: mykey2-ap-southeast-1
+      Monitoring: 'false'
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              yum update -y aws-cfn-bootstrap
+            - |
+              # Signal the status from cfn-init
+            - '/opt/aws/bin/cfn-signal -e 0 -r "Instance Creation Complete" '
+            - ''''
+            - !Ref WaitHandle
+            - |
+              '
+      Tags:
+        - Key: Name
+          Value: My_Instance
+      NetworkInterfaces:
+        - DeleteOnTermination: 'true'
+          Description: Primary network interface
+          DeviceIndex: 0
+          AssociatePublicIpAddress: 'true'
+  WaitHandle:
+    Type: 'AWS::CloudFormation::WaitConditionHandle'
+  WaitCondition:
+    Type: 'AWS::CloudFormation::WaitCondition'
+    DependsOn: MyInstance
+    Properties:
+      Handle: !Ref WaitHandle
+      Timeout: '300'
