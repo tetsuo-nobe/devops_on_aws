@@ -4,7 +4,7 @@
     - Auto Scaling Groupを作成する
     - Auto Scaling Groupにより作成される3つのEC2インスタンスがcfn-signalのシグナルを送信が完了するとAuto Scalig Groupが作成完了状態になる。
 - EC2インスタンスでの使用
-  - step0.jso
+  - step0.json
     - 2つのEC2インスタンスを作成する
     - インスタンス間の依存関係は考慮されず作成される。
   - step1.json
