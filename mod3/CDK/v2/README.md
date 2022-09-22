@@ -1,5 +1,5 @@
 ## AWS CDKv2のデモ
-### CDKv2を使用し、Lamnada関数と統合したAPI GatewayのREST APIを作成する
+### CDKv2を使用し、Lambda関数と統合したAPI GatewayのREST APIを作成する
 
 
 1. Cloud9のターミナルを開きます。

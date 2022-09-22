@@ -1,5 +1,5 @@
 ## AWS CDKのデモ
-### CDKを使用し、Lamnada関数と統合したAPI GatewayのREST APIを作成する
+### CDKを使用し、Lambda関数と統合したAPI GatewayのREST APIを作成する
 
 ### 注意：現在、Cloud9はデフォルトでCDK v2がインストールされているため、下記手順はCloud9では、そのままでは使用できません。
 ### CDK v1がインストールされている環境でご使用ください。
