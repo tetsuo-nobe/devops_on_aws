@@ -165,7 +165,7 @@ Resources:
       StorageType: gp2
       # MasterUsername: demoadmin
       # MasterUserPassword: demopassword
-      MasterUsername: !Sub '{{resolve:ssm-secure:cfn-secrets-user:1}}' # :1はパラメータのバージョン
+      MasterUsername: !Sub '{{resolve:ssm:cfn-secrets-user:1}}' # :1はパラメータのバージョン
       MasterUserPassword: !Sub '{{resolve:ssm-secure:cfn-secrets-passwd:1}}' # :1はパラメータのバージョン
       VPCSecurityGroups:
       - !Sub ${dbsg.GroupId}
