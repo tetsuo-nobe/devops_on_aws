@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Create WordPress stack'
 
-# パラメータセクション
+# 繝代Λ繝｡繝ｼ繧ｿ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
 Parameters:
   KeyName:
     Description: 'Key Pair name'
@@ -33,41 +33,15 @@ Parameters:
     Description: VPC CIDR Block (eg 10.20.3.0/24)
     Type: String
 
-#マッピングセクション
+#繝槭ャ繝斐Φ繧ｰ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
 Mappings:
   RegionMap:
-    'ap-south-1':
-      AMI: 'ami-2ed19c41'
-    'eu-west-3':
-      AMI: 'ami-c8a017b5'
-    'eu-west-2':
-      AMI: 'ami-e3051987'
-    'eu-west-1':
-      AMI: 'ami-760aaa0f'
-    'ap-northeast-2':
-      AMI: 'ami-fc862292'
     'ap-northeast-1':
-      AMI: 'ami-0f310fced6141e627'
-    'sa-east-1':
-      AMI: 'ami-1678037a'
-    'ca-central-1':
-      AMI: 'ami-ef3b838b'
-    'ap-southeast-1':
-      AMI: 'ami-0e2e44c03b85f58b3'
-    'ap-southeast-2':
-      AMI: 'ami-1a668878'
-    'eu-central-1':
-      AMI: 'ami-e28d098d'
-    'us-east-1':
-      AMI: 'ami-0323c3dd2da7fb37d'
-    'us-east-2':
-      AMI: 'ami-0f7919c33c90f5b58'
-    'us-west-1':
-      AMI: 'ami-06fcc1f0bc2c8943f'
-    'us-west-2':
-      AMI: 'ami-0d6621c01e8c2de2c'
+      AMI: 'ami-035d55281a86f9439'
+    'ap-northeast-3':
+      AMI: 'ami-0561697e48433eb33'
 
-# リソースセクション
+# 繝ｪ繧ｽ繝ｼ繧ｹ繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ
 Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
@@ -188,10 +162,10 @@ Resources:
       AllocatedStorage: 5
       BackupRetentionPeriod: 0
       DBInstanceIdentifier: chapter1
-      DBInstanceClass: 'db.t2.micro'
+      DBInstanceClass: 'db.t3.micro'
       DBName: wordpress
       Engine: MySQL
-      EngineVersion: 5.7.23
+      EngineVersion: 8.0.35
       StorageType: gp2
       MasterUsername: wpuser
       MasterUserPassword: wppassword
@@ -231,7 +205,7 @@ Resources:
           - Key: Name
             Value: 'Web Server01'
 
-# アウトプットセクション
+# 繧｢繧ｦ繝医�励ャ繝医そ繧ｯ繧ｷ繝ｧ繝ｳ
 Outputs:
  DBInstanceEndpoint:
     Value: !GetAtt chapter1.Endpoint.Address
@@ -242,4 +216,3 @@ Outputs:
     Export:
       Name: chapter1-id
  
-
