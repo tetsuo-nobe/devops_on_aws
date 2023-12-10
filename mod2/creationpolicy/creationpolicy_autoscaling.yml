@@ -2,8 +2,8 @@ Mappings:
   RegionMap:
     'ap-northeast-1':
       AMI: 'ami-0f310fced6141e627'
-    'ap-southeast-1':
-      AMI: 'ami-00b8d9cb8a7161e41'
+    'ap-northeast-3':
+      AMI: 'ami-0561697e48433eb33'
 Resources:
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
