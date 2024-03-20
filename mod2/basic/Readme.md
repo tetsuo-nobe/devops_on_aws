@@ -17,4 +17,4 @@
   - 作成した Application Load Balancer DNS 名
   - 作成した EC2 インスタンスの ID
 
-![cfn-demo-img](https://devops.nobelabo.net/img/github_mod2_wordpress.png)
+![cfn-demo-img](https://devops.nobelabo.net/img/demo-template.png)
