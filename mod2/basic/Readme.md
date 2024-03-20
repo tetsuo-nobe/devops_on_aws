@@ -7,6 +7,7 @@
     - セキュリティグループ
   - EC2 インスタンスに設定する IAM ロールとロールプロファイル
   - EC2インスタンス
+      - Apache HTTP Server をインストールしカスタムの index.html を構成      
   - ELB の Application Load Balancer 
   - RDS 
     - データベースサブネットグループ
