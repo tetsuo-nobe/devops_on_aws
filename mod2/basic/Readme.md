@@ -5,6 +5,7 @@
     - Subnet
     - RouteTable
     - セキュリティグループ
+    - NAT Gateway
   - EC2 インスタンスに設定する IAM ロールとロールプロファイル
   - EC2インスタンス
       - Apache HTTP Server をインストールしカスタムの index.html を構成      
