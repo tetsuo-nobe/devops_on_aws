@@ -71,8 +71,6 @@ git commit -m "add file"
 git push -u origin main
 ```
 
----
-
 ### 現在のブランチを確認
 
 ```
@@ -88,7 +86,9 @@ git branch
 
 ### ファイルを編集
 
+```
 echo "World" >> demo.txt
+```
 
 ### 現在のブランチや修正ファイル名の確認
 
