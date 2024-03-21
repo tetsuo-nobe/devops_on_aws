@@ -13,7 +13,7 @@ REPO_NAME=demo-repo
 ### AWS CodeCommit リポジトリの作成
 
 ```
-aws codecommit create-repository --repository-name ${REPO_NAME}  --profile advdev
+aws codecommit create-repository --repository-name ${REPO_NAME} 
 ```
 
 ### git-remote-codecommit のインストール
