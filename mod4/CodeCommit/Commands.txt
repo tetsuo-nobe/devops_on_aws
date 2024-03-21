@@ -1,3 +1,9 @@
+# AWS の認証情報が設定され、Python3 および pip 9.0.3以降が使用できる環境を前提とする
+
+# git-remote-codecommit のインストール
+
+pip install git-remote-codecommit
+
 # HTTP GRCでgit clone
 git clone codecommit://<repository_name>  demo-repo
 
