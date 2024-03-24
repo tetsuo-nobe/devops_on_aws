@@ -10,6 +10,12 @@
 REPO_NAME=demo-repo
 ```
 
+### AWS IAM の ID（認証情報をもっていること） を確認
+
+```
+aws sts get-caller-identity
+```
+
 ### AWS CodeCommit リポジトリの作成
 
 ```
