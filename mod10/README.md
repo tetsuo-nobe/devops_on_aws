@@ -2,6 +2,8 @@
 
 ## AWS CloudFormation での活用
 
-
+* secrets_cfn フォルダ
 
 ## AWS CodeBuild での活用
+
+* secrets_codebuild フォルダ
