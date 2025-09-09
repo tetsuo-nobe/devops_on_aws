@@ -2,8 +2,8 @@
 - webapp_template_parameter_store.yaml
   - Apache HTTP Server と MariaDB を構築するテンプレート
     - Systems Manager のパラメータストアで管理しているパラメータより値を参照して下記に設定
-      - RDS データベースの管理者ユーザ名 (String)
-      - RDS データベースの管理者ユーザパスワード (**SecureString**)
+      - RDS データベースの管理者ユーザ名 (String) (235行目）
+      - RDS データベースの管理者ユーザパスワード (**SecureString**) (236行目）
 - webapp_template_secrets_manager.yaml
   - Apache HTTP Server と MariaDB を構築するテンプレート
     - Secrets Manager で管理しているシークレットより値を参照して下記に設定
